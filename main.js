@@ -67,6 +67,7 @@ async function obtenerDatos(nombre) {
         await fetch(URL)
          .then((res) => res.json())
          .then((data) => {
+            const nombre = data.name;
             const humedad = data.main.humidity;
             const temperatura = data.main.temp;
             const descripcion = data.weather[0].description;
@@ -74,7 +75,7 @@ async function obtenerDatos(nombre) {
             const vientoGrados = data.wind.deg; 
             const velocidadViento = data.wind.speed;
 
-            return humedad , temperatura, descripcion, icono, vientoGrados, velocidadViento;
+            mostrarDatos(nombre, humedad , temperatura, descripcion, icono, vientoGrados, velocidadViento);
          })
     } catch (error) {
         console.error(`Ocurrio un error al contactar a la API`)
@@ -84,6 +85,33 @@ async function obtenerDatos(nombre) {
     
 }
 
-function mostrarDatos(humedad, temperatura, descripcion, icono, vientoGrados, velocidadViento) {
+function mostrarDatos(nombre, humedad, temperatura, descripcion, icono, vientoGrados, velocidadViento) {
+    contenedorClima.innerHTML = '';
     
+    const nomb = document.createElement("h2");
+    const des = document.createElement("p");
+    const hume = document.createElement("span");
+    const vientoGrado = document.createElement("span");
+    const veloViento = document.createElement("span");
+    const temp = document.createElement("span");
+    const iconURL = document.createElement("img"); 
+
+    nomb.textContent = nombre;
+    iconURL.setAttribute("src", `http://openweathermap.org/img/wn/${icono}@2x.png`);    
+    des.textContent = descripcion;
+    temp.textContent = `Temperatura: ${temperatura} °C`
+    hume.textContent = `Humedad: ${humedad}% `
+    vientoGrado.textContent = `Direccion Del Viento: ${vientoGrados}°`
+    veloViento.textContent = `Velocidad Del Viento: ${velocidadViento} Km/h`
+
+    nomb.classList.add("titulo");
+    
+    contenedorClima.appendChild(nomb);
+    contenedorClima.appendChild(iconURL);
+    contenedorClima.appendChild(temp);
+    contenedorClima.appendChild(des);
+    contenedorClima.appendChild(hume);
+    contenedorClima.appendChild(vientoGrado);
+    contenedorClima.appendChild(veloViento);
+
 }

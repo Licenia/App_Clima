@@ -2,6 +2,7 @@
 ::before,
 ::after{
     box-sizing: border-box;
+    font-family: Quicksand;
 }
 
 .container-search{
@@ -30,6 +31,10 @@ button{
     margin-left: 1rem;
     color: #fff;
     font-size: 1rem;
+}
+
+button:hover{
+cursor: pointer;
 }
 
 input:focus{
