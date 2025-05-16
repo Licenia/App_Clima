@@ -1,3 +1,4 @@
+
 const buscar = document.getElementById("buscar")
 const botonBuscar = document.getElementById("boton-buscar");
 const contenedorClima = document.getElementById("container");
@@ -62,7 +63,7 @@ function Buscar(ciudades, buscar){
 }
 
 async function obtenerDatos(nombre) {
-    const URL =  `http://api.openweathermap.org/data/2.5/weather?q=${nombre}&APPID=ab35e7b26434600d30ebbb2cfb87f5a7&units=metric`;
+    const URL =  `https://api.openweathermap.org/data/2.5/weather?q=${nombre}&APPID=${API_KEY}&units=metric`;
     try {
         await fetch(URL)
          .then((res) => res.json())
@@ -92,7 +93,7 @@ function mostrarDatos(nombre, humedad, temperatura, descripcion, icono, vientoGr
     nomb.textContent = nombre;
     
     const iconURL = document.createElement("img");
-    iconURL.setAttribute("src", `http://openweathermap.org/img/wn/${icono}@2x.png`);    
+    iconURL.setAttribute("src", `httpS://openweathermap.org/img/wn/${icono}@2x.png`);    
     
     const des = document.createElement("p");
     des.textContent = descripcion;
@@ -115,7 +116,7 @@ function mostrarDatos(nombre, humedad, temperatura, descripcion, icono, vientoGr
 
         const value = document.createElement("span");
         value.textContent = valueText; 
-        value.classList.add(valor);
+        value.classList.add("valor");
 
         grupo.appendChild(label);
         grupo.appendChild(value);
@@ -124,14 +125,14 @@ function mostrarDatos(nombre, humedad, temperatura, descripcion, icono, vientoGr
     }
 
     containerCabecera.appendChild(nomb);
-    containerCabecera.appendChild(iconoUrl);
+    containerCabecera.appendChild(iconURL);
     contenedorClima.appendChild(containerCabecera);
     contenedorClima.appendChild(des);
     
     cards.appendChild(agruparDatos("Temperatura",`${temperatura} °C` ))
     cards.appendChild(agruparDatos("Humedad",`${humedad}%` ))
-    cards.appendChild(crearGrupo("Dirección del Viento", `${vientoGrados}°`));
-    cards.appendChild(crearGrupo("Velocidad del Viento", `${velocidadViento} Km/h`));
+    cards.appendChild(agruparDatos("Dirección del Viento", `${vientoGrados}°`));
+    cards.appendChild(agruparDatos("Velocidad del Viento", `${velocidadViento} Km/h`));
   
     containerDatos.appendChild(cards);
    contenedorClima.appendChild(containerDatos);
