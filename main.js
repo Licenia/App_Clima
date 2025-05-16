@@ -62,7 +62,7 @@ function Buscar(ciudades, buscar){
 }
 
 async function obtenerDatos(nombre) {
-    const URL =  `http://api.openweathermap.org/data/2.5/weather?q=${nombre}&APPID=ab35e7b26434600d30ebbb2cfb87f5a7`;
+    const URL =  `http://api.openweathermap.org/data/2.5/weather?q=${nombre}&APPID=ab35e7b26434600d30ebbb2cfb87f5a7&units=metric`;
     try {
         await fetch(URL)
          .then((res) => res.json())
@@ -89,29 +89,51 @@ function mostrarDatos(nombre, humedad, temperatura, descripcion, icono, vientoGr
     contenedorClima.innerHTML = '';
     
     const nomb = document.createElement("h2");
-    const des = document.createElement("p");
-    const hume = document.createElement("span");
-    const vientoGrado = document.createElement("span");
-    const veloViento = document.createElement("span");
-    const temp = document.createElement("span");
-    const iconURL = document.createElement("img"); 
-
     nomb.textContent = nombre;
-    iconURL.setAttribute("src", `http://openweathermap.org/img/wn/${icono}@2x.png`);    
-    des.textContent = descripcion;
-    temp.textContent = `Temperatura: ${temperatura} °C`
-    hume.textContent = `Humedad: ${humedad}% `
-    vientoGrado.textContent = `Direccion Del Viento: ${vientoGrados}°`
-    veloViento.textContent = `Velocidad Del Viento: ${velocidadViento} Km/h`
-
-    nomb.classList.add("titulo");
     
-    contenedorClima.appendChild(nomb);
-    contenedorClima.appendChild(iconURL);
-    contenedorClima.appendChild(temp);
-    contenedorClima.appendChild(des);
-    contenedorClima.appendChild(hume);
-    contenedorClima.appendChild(vientoGrado);
-    contenedorClima.appendChild(veloViento);
+    const iconURL = document.createElement("img");
+    iconURL.setAttribute("src", `http://openweathermap.org/img/wn/${icono}@2x.png`);    
+    
+    const des = document.createElement("p");
+    des.textContent = descripcion;
+    
+    
+    const containerCabecera = document.createElement("div");
+    containerCabecera.classList.add("container-iconoPais");
+    
+    
+    const containerDatos = document.createElement("div");
+    const cards = document.createElement("section");
+    cards.classList.add("cards");
+    
+    const agruparDatos = (labelText, valueText) =>{
+        const grupo = document.createElement("div");
+        grupo.classList.add("dato")
 
+        const label = document.createElement("span");
+        label.textContent = labelText; 
+
+        const value = document.createElement("span");
+        value.textContent = valueText; 
+        value.classList.add(valor);
+
+        grupo.appendChild(label);
+        grupo.appendChild(value);
+        return grupo;
+
+    }
+
+    containerCabecera.appendChild(nomb);
+    containerCabecera.appendChild(iconoUrl);
+    contenedorClima.appendChild(containerCabecera);
+    contenedorClima.appendChild(des);
+    
+    cards.appendChild(agruparDatos("Temperatura",`${temperatura} °C` ))
+    cards.appendChild(agruparDatos("Humedad",`${humedad}%` ))
+    cards.appendChild(crearGrupo("Dirección del Viento", `${vientoGrados}°`));
+    cards.appendChild(crearGrupo("Velocidad del Viento", `${velocidadViento} Km/h`));
+  
+    containerDatos.appendChild(cards);
+   contenedorClima.appendChild(containerDatos);
+    
 }

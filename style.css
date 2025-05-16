@@ -40,3 +40,15 @@ cursor: pointer;
 input:focus{
     border-bottom-color: #f7f8fa;
 }
+
+.container-card{
+    border: 1px solid black;
+    width: 70%;
+    height: auto;
+    border-radius: 1rem;
+}
+
+.container-iconoPais{
+    display: flex;
+    align-items: center;
+}
