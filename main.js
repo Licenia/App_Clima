@@ -113,6 +113,7 @@ function mostrarDatos(nombre, humedad, temperatura, descripcion, icono, vientoGr
 
         const label = document.createElement("span");
         label.textContent = labelText; 
+        label.classList.add("titulos");
 
         const value = document.createElement("span");
         value.textContent = valueText; 

@@ -42,13 +42,47 @@ input:focus{
 }
 
 .container-card{
+    margin: 1rem;
     border: 1px solid black;
-    width: 70%;
+    width: 65%;
     height: auto;
     border-radius: 1rem;
+    padding: 1rem;
 }
 
 .container-iconoPais{
     display: flex;
     align-items: center;
+}
+
+.container-iconoPais h2{
+    font-size: 30px;
+
+}
+
+p{
+    margin: 0;
+    font-size: larger;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+.titulos{
+    font-size: medium;
+    font-weight: 700;
+}
+
+.dato{
+    font-size: 18px;
+    
+}
+
+.valor{
+    display: block;
+    text-align: center;
 }
