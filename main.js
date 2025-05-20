@@ -52,7 +52,7 @@ function Buscar(ciudades, buscar) {
   if (buscador === "") {
     console.warn("Ingresa un Pais");
     return;
-  }
+  } 
 
   for (let i = 0; i < claves.length; i++) {
     const clave = claves[i];
