@@ -9,7 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/src/style.css" />
     <title>Consulta Clima</title>
   </head>
   <body>
@@ -18,12 +18,20 @@
       <p>Consulta el clima en tiempo real con datos precisos.</p>
     </header>
 
-    <div class="container-search" id="container-search">
-      <input type="text" id="buscar" placeholder="Ingrese una Ciudad" />
-      <button id="boton-buscar">Buscar</button>
-    </div>
-    <section class="container-card" id="container"></section>
-    <script src="config.js"></script>
-    <script src="main.js"></script>
+    <main>
+      <div class="buscador-wrapper">
+        <div class="container-search" id="container-search">
+          <input type="text" id="buscar" placeholder="Ingrese una Ciudad" />
+          <span class="oculto" id="boton">&#10006;</span>
+        </div>
+      </div>
+
+      <select id="ciudadesEncontradas" class="oculto"></select>
+      <section class="container-card" id="container"></section>
+    </main>
+
+    <footer>@copyRigth Licenia Alvear</footer>
+    <script src="/src/config.js"></script>
+    <script src="/src/index.js" type="module"></script>
   </body>
 </html>

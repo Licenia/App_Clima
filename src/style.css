@@ -8,6 +8,16 @@
 body {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  margin: 0;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -26,9 +36,28 @@ header p {
   color: #666;
 }
 
+.buscador-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+#ciudadesEncontradas {
+  min-width: 40%;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  appearance: none;
+}
+
 .container-search {
   display: flex;
-  width: 50%;
+  min-width: 40%;
   background-color: #f1eaf1;
   border-radius: 1rem;
   padding: 0.5rem;
@@ -48,24 +77,6 @@ header p {
 .container-search input:focus {
   border-bottom-color: #4e5d94;
 }
-
-button {
-  width: 30%;
-  padding: 0.5rem;
-  background-color: #95abd8;
-  border: 1px solid #95abd8;
-  border-radius: 0.8rem;
-  margin-left: 1rem;
-  color: #fff;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-  cursor: pointer;
-   transform: scale(1.05);
-}
-
 
 .container-card {
   display: none;
@@ -120,4 +131,12 @@ p {
 .valor {
   display: block;
   text-align: center;
+}
+
+.oculto{
+  display: none;
+}
+
+footer{
+ color: #807d7d;
 }
