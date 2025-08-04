@@ -17,9 +17,17 @@ export async function Buscar() {
     }
 
     $selectCiudades.innerHTML = "";
+
+    const placeholderOption = document.createElement("option");
+    placeholderOption.value = '';
+    placeholderOption.textContent = "Seleccione una opcion";
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    $selectCiudades.appendChild(placeholderOption); 
+
     data.forEach((ciudad, index) => {
       const opcion = document.createElement("option");
-      opcion.value = index;
+      opcion.value = index,
       opcion.textContent = `${ciudad.name}, ${ciudad.state || ""}, ${
         ciudad.country
       }`
@@ -32,7 +40,10 @@ export async function Buscar() {
     $selectCiudades.dataset.ciudades = JSON.stringify(data);
     $selectCiudades.style.display = "inline-block";
 
-    if (data.length === 1) seleccionarCiudades();
+    if (data.length === 1){
+      seleccionarCiudad();
+    }
+
   } catch (error) {
     console.error("Error al buscar la ciudad:", error);
   }
@@ -55,12 +66,20 @@ async function obtenerDatos(lat, lon, nombreCiudad) {
     const res = await fetch(URL),
     data = await res.json();
 
+    const datos ={
+      data,
+      nombreCiudad
+    }
+
+    localStorage.setItem("datosGuardados", JSON.stringify(datos))
+
     const humedad = data.main.humidity,
       temperatura = data.main.temp,
       descripcion = data.weather[0].description,
       icono = data.weather[0].icon,
       vientoGrados = data.wind.deg,
       velocidadViento = data.wind.speed;
+
 
     mostrarDatos(
       nombreCiudad,
@@ -95,7 +114,7 @@ function mostrarDatos(
   const iconURL = document.createElement("img");
   iconURL.setAttribute(
     "src",
-    `httpS://openweathermap.org/img/wn/${icono}@2x.png`
+    `https://openweathermap.org/img/wn/${icono}@2x.png`
   );
 
   const des = document.createElement("p");
@@ -139,4 +158,22 @@ function mostrarDatos(
 
   containerDatos.appendChild(cards);
   contenedorClima.appendChild(containerDatos);
+}
+
+export function extraerDatosGuardados() {
+  const recuperarDatos = JSON.parse(localStorage.getItem("datosGuardados"));
+
+  if (!recuperarDatos) return
+
+  const nombreCiudad = recuperarDatos.nombreCiudad,
+  humedad = recuperarDatos.data.main.humidity,
+  temperatura = recuperarDatos.data.main.temp,
+  descripcion = recuperarDatos.data.weather[0].description,
+  icono = recuperarDatos.data.weather[0].icon,
+  viento = recuperarDatos.data.wind.deg,
+  velocidad = recuperarDatos.data.wind.speed;
+
+    mostrarDatos(nombreCiudad, humedad, temperatura, descripcion,icono, viento, velocidad);
+  
+
 }
