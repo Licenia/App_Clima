@@ -57,6 +57,7 @@ export function seleccionarCiudad() {
   const ciudad = data[indexSeleccionado];
 
   const nombreCiudad = `${ciudad.name}, ${ciudad.country}`;
+  mostrarSkeleton(indexSeleccionado)
   obtenerDatos(ciudad.lat, ciudad.lon, nombreCiudad);
 }
 
@@ -106,6 +107,7 @@ function mostrarDatos(
   velocidadViento
 ) {
   contenedorClima.innerHTML = "";
+  contenedorClima.classList.remove("skeleton")
   contenedorClima.classList.add("show");
 
   const nomb = document.createElement("h2");
@@ -175,5 +177,31 @@ export function extraerDatosGuardados() {
 
     mostrarDatos(nombreCiudad, humedad, temperatura, descripcion,icono, viento, velocidad);
   
+}
+
+function mostrarSkeleton(ciudad){
+  const $containerCard = document.getElementById("container"),
+  $skeleton = document.createElement("div");
+
+  $skeleton.classList.add("card-skeleton", "skeleton");
+  $skeleton.setAttribute("data-ciudad", ciudad )
+
+   $skeleton.innerHTML = `
+      <div class="skeleton-header">
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-icon"></div>
+    </div>
+    <div class="skeleton skeleton-description"></div>
+    <div class="skeleton-cards">
+      <div class="skeleton skeleton-line"></div>
+      <div class="skeleton skeleton-line"></div>
+      <div class="skeleton skeleton-line"></div>
+      <div class="skeleton skeleton-line"></div>
+    </div>
+  `;
+
+
+  $containerCard.innerHTML = ''
+  $containerCard.appendChild($skeleton);
 
 }
