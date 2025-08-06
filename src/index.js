@@ -31,7 +31,7 @@ d.addEventListener("click", (e) => {
     !e.target.closest("#ciudadesEncontradas") &&
     !e.target.closest("#boton");
 
-  if (isClickOutside) {
+  if (isClickOutside || e.target.matches("#boton")) {
     $ciudadBuscar.value = "";
     $selectCiudades.style.display = "none";
     $btnCerrar.classList.add("oculto");
