@@ -1,7 +1,7 @@
 const $ciudadBuscar = document.getElementById("buscar"),
- contenedorClima = document.getElementById("container"),
-  $selectCiudades = document.getElementById("ciudadesEncontradas");
-
+  contenedorClima = document.getElementById("container"),
+  $selectCiudades = document.getElementById("ciudadesEncontradas"),
+  $skeletonLoader = document.getElementById("skeleton-loader");
 
 export async function Buscar() {
   let city = $ciudadBuscar.value.trim();
@@ -19,20 +19,20 @@ export async function Buscar() {
     $selectCiudades.innerHTML = "";
 
     const placeholderOption = document.createElement("option");
-    placeholderOption.value = '';
+    placeholderOption.value = "";
     placeholderOption.textContent = "Seleccione una opcion";
     placeholderOption.disabled = true;
     placeholderOption.selected = true;
-    $selectCiudades.appendChild(placeholderOption); 
+    $selectCiudades.appendChild(placeholderOption);
 
     data.forEach((ciudad, index) => {
       const opcion = document.createElement("option");
-      opcion.value = index,
-      opcion.textContent = `${ciudad.name}, ${ciudad.state || ""}, ${
-        ciudad.country
-      }`
-        .replace(/,\s+/g, ", ")
-        .trim();
+      (opcion.value = index),
+        (opcion.textContent = `${ciudad.name}, ${ciudad.state || ""}, ${
+          ciudad.country
+        }`
+          .replace(/,\s+/g, ", ")
+          .trim());
 
       $selectCiudades.appendChild(opcion);
     });
@@ -40,24 +40,23 @@ export async function Buscar() {
     $selectCiudades.dataset.ciudades = JSON.stringify(data);
     $selectCiudades.style.display = "inline-block";
 
-    if (data.length === 1){
+    if (data.length === 1) {
       seleccionarCiudad();
     }
-
   } catch (error) {
     console.error("Error al buscar la ciudad:", error);
   }
 }
 
 export function seleccionarCiudad() {
-  $ciudadBuscar.value = '';
+  $ciudadBuscar.value = "";
 
   const data = JSON.parse($selectCiudades.dataset.ciudades);
   const indexSeleccionado = $selectCiudades.value;
   const ciudad = data[indexSeleccionado];
 
   const nombreCiudad = `${ciudad.name}, ${ciudad.country}`;
-  mostrarSkeleton(indexSeleccionado)
+  mostrarSkeleton(indexSeleccionado);
   obtenerDatos(ciudad.lat, ciudad.lon, nombreCiudad);
 }
 
@@ -65,14 +64,14 @@ async function obtenerDatos(lat, lon, nombreCiudad) {
   const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}&units=metric&lang=es`;
   try {
     const res = await fetch(URL),
-    data = await res.json();
+      data = await res.json();
 
-    const datos ={
+    const datos = {
       data,
-      nombreCiudad
-    }
+      nombreCiudad,
+    };
 
-    localStorage.setItem("datosGuardados", JSON.stringify(datos))
+    localStorage.setItem("datosGuardados", JSON.stringify(datos));
 
     const humedad = data.main.humidity,
       temperatura = data.main.temp,
@@ -80,7 +79,6 @@ async function obtenerDatos(lat, lon, nombreCiudad) {
       icono = data.weather[0].icon,
       vientoGrados = data.wind.deg,
       velocidadViento = data.wind.speed;
-
 
     mostrarDatos(
       nombreCiudad,
@@ -106,9 +104,10 @@ function mostrarDatos(
   vientoGrados,
   velocidadViento
 ) {
+  $skeletonLoader.classList.add("ocult");
+
   contenedorClima.innerHTML = "";
-  contenedorClima.classList.remove("skeleton")
-  contenedorClima.classList.add("show");
+  contenedorClima.classList.add("visible","show");
 
   const nomb = document.createElement("h2");
   nomb.textContent = nombre;
@@ -165,28 +164,40 @@ function mostrarDatos(
 export function extraerDatosGuardados() {
   const recuperarDatos = JSON.parse(localStorage.getItem("datosGuardados"));
 
-  if (!recuperarDatos) return
+  if (!recuperarDatos) return;
 
   const nombreCiudad = recuperarDatos.nombreCiudad,
-  humedad = recuperarDatos.data.main.humidity,
-  temperatura = recuperarDatos.data.main.temp,
-  descripcion = recuperarDatos.data.weather[0].description,
-  icono = recuperarDatos.data.weather[0].icon,
-  viento = recuperarDatos.data.wind.deg,
-  velocidad = recuperarDatos.data.wind.speed;
+    humedad = recuperarDatos.data.main.humidity,
+    temperatura = recuperarDatos.data.main.temp,
+    descripcion = recuperarDatos.data.weather[0].description,
+    icono = recuperarDatos.data.weather[0].icon,
+    viento = recuperarDatos.data.wind.deg,
+    velocidad = recuperarDatos.data.wind.speed;
 
-    mostrarDatos(nombreCiudad, humedad, temperatura, descripcion,icono, viento, velocidad);
-  
+  mostrarDatos(
+    nombreCiudad,
+    humedad,
+    temperatura,
+    descripcion,
+    icono,
+    viento,
+    velocidad
+  );
 }
 
-function mostrarSkeleton(ciudad){
-  const $containerCard = document.getElementById("container"),
-  $skeleton = document.createElement("div");
+function mostrarSkeleton(ciudad) {
+  $skeletonLoader.innerHTML = "";
+  
+  contenedorClima.classList.remove("visible", "show")
 
+  $skeletonLoader.classList.remove("ocult");
+  $skeletonLoader.classList.add("visible", "show");
+  
+  const $skeleton = document.createElement("div");
   $skeleton.classList.add("card-skeleton", "skeleton");
-  $skeleton.setAttribute("data-ciudad", ciudad )
+  $skeleton.setAttribute("data-ciudad", ciudad);
 
-   $skeleton.innerHTML = `
+  $skeleton.innerHTML = `
       <div class="skeleton-header">
       <div class="skeleton skeleton-title"></div>
       <div class="skeleton skeleton-icon"></div>
@@ -200,8 +211,6 @@ function mostrarSkeleton(ciudad){
     </div>
   `;
 
-
-  $containerCard.innerHTML = ''
-  $containerCard.appendChild($skeleton);
+  $skeletonLoader.appendChild($skeleton);
 
 }
