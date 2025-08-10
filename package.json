@@ -1,0 +1,18 @@
+{
+  "name": "app_clima",
+  "version": "1.0.0",
+  "description": "Este proyecto es un clon de una aplicación del clima. Se obtienen datos reales a través de la API de OpenWeather. Cuenta con una interfaz simple en la que encontrarás un buscador; al ingresar una ciudad, aparecerá una tarjeta con la información climática correspondiente: temperatura, icono, descripción, humedad, velocidad del viento y dirección del viento.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^7.1.1"
+  }
+}

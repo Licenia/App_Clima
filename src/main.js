@@ -1,3 +1,7 @@
+
+import { API_KEY } from './config.js';
+
+
 const $ciudadBuscar = document.getElementById("buscar"),
   contenedorClima = document.getElementById("container"),
   $selectCiudades = document.getElementById("ciudadesEncontradas"),
