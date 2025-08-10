@@ -47,8 +47,8 @@ app-clima/
 - **Skeleton Loader:** se agrego una animación skeleton para mejorar la experiencia del usuario mientras se carga la información.
 - **Select con integracion de API geografica:** se expandio el rango de busqueda de lugares a nivel mundial mediante la integración de una API geográfica.
 - **Persistencia de datos:** se implemento almacenamiento temporal de la informacion de consulta, que se limpian al realizar una nueva busqueda.
--- **Diseño responsivo:** Se adapto la interfaz para diferentes tamaños de pantalla, mejorando su usabilidad en dispositivos moviles.
--- **Mejora en la semántica:** se corrigio la estructura semántica del proyecto para una mejor accesibilida y orden del código.
+- **Diseño responsivo:** Se adapto la interfaz para diferentes tamaños de pantalla, mejorando su usabilidad en dispositivos moviles.
+- **Mejora en la semántica:** se corrigio la estructura semántica del proyecto para una mejor accesibilida y orden del código.
 
 # Proyecto publicado en Netlify
 Puedes probar la aplicación web directamente en el siguiente enlace:
