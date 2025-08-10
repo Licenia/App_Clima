@@ -1,5 +1,5 @@
 # 🌤️ Clima Ahora
-Este proyecto es un clon de una aplicación del clima. Se obtienen datos reales a través de la API de OpenWeather. Cuenta con una interfaz simple en la que encontrarás un buscador; al ingresar una ciudad, aparecerá una tarjeta con la información climática correspondiente: temperatura, icono, descripción, humedad, velocidad del viento y dirección del viento.
+Este proyecto es una app web del clima. Se obtienen datos reales a través de la API de OpenWeather. Cuenta con una interfaz simple en la que encontrarás un buscador; al ingresar una ciudad, aparecerá una tarjeta con la información climática correspondiente: temperatura, icono, descripción, humedad, velocidad del viento y dirección del viento.
 
 ## Objetivo
 
