@@ -9,7 +9,7 @@ const $ciudadBuscar = document.getElementById("buscar"),
 export async function Buscar() {
   let city = $ciudadBuscar.value.trim();
 
-  const URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`;
+  const URL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`;
   try {
     const res = await fetch(URL),
       data = await res.json();
