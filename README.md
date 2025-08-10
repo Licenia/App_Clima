@@ -86,3 +86,5 @@ El proyecto se abrira en tu navegador, normalmente en:
  http://localhost:5173/
 ~~~
 
+# Gif
+![funcionamiento de Clima Ahora](public/climaAhora.gif)
